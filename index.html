@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spotify · Microsoft Store Direct-Install Demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Load the official badge component -->
+    <script
+      type="module"
+      src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"
+    ></script>
+
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        padding: 3rem 1rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+      }
+      ms-store-badge::part(img) {
+        /* optional: size the badge */
+        max-height: 64px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Install Spotify with one click</h1>
+    <p>
+      This badge uses <code>window-mode="direct"</code>, so the Microsoft Store
+      drops a portable installer while you stay on this page.
+    </p>
+
+    <!-- The magic: direct hand-off to Store Web Installer -->
+    <ms-store-badge
+      productid="9NCBCSZSJRSB"
+      <!--
+      Spotify’s
+      Store
+      ID
+      →
+      verified
+      --
+    >
+      window-mode="direct" theme="auto" cid="demo_direct">
+    </ms-store-badge>
+
+    <!-- Zero-JS fallback for browsers that block Web Components -->
+    <noscript>
+      <a
+        href="https://apps.microsoft.com/detail/9NCBCSZSJRSB?mode=direct"
+        rel="noopener"
+      >
+        <img
+          src="https://get.microsoft.com/images/en-us%20light.svg"
+          alt="Get it from Microsoft Store"
+          style="height: 64px"
+        />
+      </a>
+    </noscript>
+
+    <footer style="font-size: 0.875rem; color: #555">
+      Works on Windows 10/11 + Chromium/Edge. Other platforms will ignore the
+      badge gracefully.
+    </footer>
+  </body>
+</html>
