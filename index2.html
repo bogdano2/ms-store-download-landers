@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install Spotify - Optimized Experience</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #191414;
+            margin-bottom: 16px;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 32px;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        
+        .edge-recommendation {
+            background: linear-gradient(135deg, #0078d4, #4cc2ff);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+            display: none;
+        }
+        
+        .edge-recommendation.show {
+            display: block;
+        }
+        
+        .edge-recommendation h3 {
+            margin: 0 0 16px 0;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .edge-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .edge-button, .fallback-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .edge-button {
+            background: white;
+            color: #0078d4;
+            border: 2px solid white;
+        }
+        
+        .edge-button:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-1px);
+        }
+        
+        .fallback-button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .fallback-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .badge-container {
+            margin: 32px 0;
+        }
+        
+        .browser-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 32px;
+            text-align: left;
+        }
+        
+        .browser-detected {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #e8f5e8;
+            border: 1px solid #1db954;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #1db954;
+            margin-bottom: 16px;
+        }
+        
+        .why-edge {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .why-edge h4 {
+            margin: 0 0 8px 0;
+            color: #1976d2;
+        }
+        
+        .technical-note {
+            background: #fff3e0;
+            border: 1px solid #ffb74d;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            color: #e65100;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Get Spotify</h1>
+        <p class="subtitle">
+            Get the best installation experience for your browser.
+        </p>
+        
+        <!-- Edge Recommendation (shown for non-Edge users) -->
+        <div id="edge-recommendation" class="edge-recommendation">
+            <h3>
+                <span>🔷</span>
+                Best Experience: Microsoft Store App via Edge
+            </h3>
+            <div class="edge-benefits">
+                <div class="benefit">
+                    <span>⚡</span>
+                    <span>Direct Store app launch</span>
+                </div>
+                <div class="benefit">
+                    <span>🛡️</span>
+                    <span>No security prompts</span>
+                </div>
+                <div class="benefit">
+                    <span>🎯</span>
+                    <span>Native Store integration</span>
+                </div>
+                <div class="benefit">
+                    <span>✨</span>
+                    <span>Optimized for Windows</span>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <a href="#" id="open-in-edge" class="edge-button">
+                    🚀 Open Microsoft Store in Edge
+                </a>
+                <button id="use-current-browser" class="fallback-button">
+                    Continue with <span id="current-browser-name">Current Browser</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Standard Badge (always present) -->
+        <div class="badge-container">
+            <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+            <ms-store-badge 
+                id="smart-badge"
+                productid="9NCBCSZSJRSB" 
+                productname="Spotify Music" 
+                theme="auto"
+                cid="smart-edge-experience">
+            </ms-store-badge>
+        </div>
+        
+        <div class="browser-info">
+            <div id="browser-detection"></div>
+            
+            <div id="why-edge-section" class="why-edge" style="display: none;">
+                <h4>Why the Microsoft Store app provides the best experience:</h4>
+                <p>The button above will launch Edge and directly open the Microsoft Store app for Spotify installation. This bypasses web browser limitations and provides the fastest, most secure installation method with native Windows integration.</p>
+            </div>
+            
+            <div class="technical-note">
+                <strong>Technical Note:</strong> Due to Windows security policies, we cannot automatically redirect you to Edge, but we can offer you the choice for the optimal experience.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Browser detection function
+        function detectBrowser() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const vendor = navigator.vendor?.toLowerCase() || '';
+            
+            if (userAgent.includes('edg/') || userAgent.includes('edge/')) {
+                return { name: 'Edge', isEdge: true, icon: '🔷' };
+            }
+            if (userAgent.includes('firefox/')) {
+                return { name: 'Firefox', isEdge: false, icon: '🦊' };
+            }
+            if (userAgent.includes('chrome/') && vendor.includes('google')) {
+                return { name: 'Chrome', isEdge: false, icon: '🌐' };
+            }
+            if (userAgent.includes('safari/') && vendor.includes('apple')) {
+                return { name: 'Safari', isEdge: false, icon: '🧭' };
+            }
+            if (userAgent.includes('opr/') || userAgent.includes('opera/')) {
+                return { name: 'Opera', isEdge: false, icon: '🎭' };
+            }
+            
+            return { name: 'Unknown', isEdge: false, icon: '❓' };
+        }
+        
+        // Configure experience based on browser
+        function configureExperience() {
+            const browser = detectBrowser();
+            const badge = document.getElementById('smart-badge');
+            const detectionDiv = document.getElementById('browser-detection');
+            const edgeRecommendation = document.getElementById('edge-recommendation');
+            const whyEdgeSection = document.getElementById('why-edge-section');
+            const currentBrowserSpan = document.getElementById('current-browser-name');
+            
+            // Update browser detection display
+            detectionDiv.innerHTML = `
+                <div class="browser-detected">
+                    <span>${browser.icon}</span>
+                    <span>Detected: ${browser.name}</span>
+                </div>
+            `;
+            
+            if (browser.isEdge) {
+                // User is already on Edge - use full mode, hide recommendation
+                badge.setAttribute('window-mode', 'full');
+                detectionDiv.innerHTML += `<p style="color: #0078d4; font-weight: 600;">✅ Perfect! You're using Edge for the optimal Microsoft Store experience.</p>`;
+            } else {
+                // User is not on Edge - show recommendation and configure fallback
+                edgeRecommendation.classList.add('show');
+                whyEdgeSection.style.display = 'block';
+                currentBrowserSpan.textContent = browser.name;
+                
+                // Set up Edge redirect link to directly open Microsoft Store app
+                const storeProtocolUrl = 'ms-windows-store://pdp/?ProductId=9NCBCSZSJRSB';
+                const edgeUrl = `microsoft-edge:${storeProtocolUrl}`;
+                document.getElementById('open-in-edge').href = edgeUrl;
+                
+                // Configure badge for current browser (direct mode for Chrome-like, full for others)
+                const windowMode = (browser.name === 'Chrome' || browser.name === 'Opera') ? 'direct' : 'full';
+                badge.setAttribute('window-mode', windowMode);
+                
+                detectionDiv.innerHTML += `<p>For the best experience, we recommend opening this page in Microsoft Edge.</p>`;
+            }
+        }
+        
+        // Handle "Continue with current browser" button
+        document.getElementById('use-current-browser')?.addEventListener('click', function() {
+            document.getElementById('edge-recommendation').style.display = 'none';
+            document.getElementById('why-edge-section').style.display = 'none';
+        });
+        
+        // Track Edge redirect attempts
+        document.getElementById('open-in-edge')?.addEventListener('click', function(e) {
+            // Log the attempt
+            console.log('User chose to open Microsoft Store in Edge');
+            
+            // The link will try to open Edge and directly launch Microsoft Store
+            // If it fails (protocol not supported), the user will see the fallback
+            setTimeout(() => {
+                // Check if user is still on the page (Edge/Store didn't open)
+                if (document.hasFocus()) {
+                    // Provide multiple fallback options
+                    const fallbackMessage = `Could not automatically open Microsoft Store in Edge. Try one of these options:
+
+Option 1: Copy this Microsoft Store link and paste it into Edge:
+ms-windows-store://pdp/?ProductId=9NCBCSZSJRSB
+
+Option 2: Visit the web Store page in Edge:
+https://apps.microsoft.com/detail/9NCBCSZSJRSB
+
+Option 3: Search for "Spotify" in the Microsoft Store app`;
+                    
+                    alert(fallbackMessage);
+                }
+            }, 2000);
+        });
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', configureExperience);
+        
+        // Also run immediately in case DOMContentLoaded already fired
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', configureExperience);
+        } else {
+            configureExperience();
+        }
+    </script>
+</body>
+</html>
