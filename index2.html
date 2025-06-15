@@ -444,7 +444,7 @@
   // Skip Edge
   if (/\bEdg\//.test(navigator.userAgent)) return;
 
-  const hint = document.getElementById('download-hint');
+  hint = document.getElementById('download-hint');
 
   // Show arrow the first time the user clicks something that looks like a download
   document.addEventListener('click', (e) => {
