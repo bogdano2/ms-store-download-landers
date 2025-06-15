@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -334,20 +335,6 @@
                 
                 badge1.setAttribute('window-mode', 'direct');
                 badge2.setAttribute('window-mode', 'direct');
-            }
-            
-            // Update browser detection display
-            const browserDetection = document.getElementById('browser-detection');
-            const detectionClass = isEdge ? 'edge' : 'non-edge';
-            
-            browserDetection.innerHTML = `
-                <div class="browser-detected ${detectionClass}">
-                    <span>${browser.icon}</span>
-                    <span>Detected: ${browser.name}</span>
-                </div>
-                <p><strong>Configuration:</strong> ${isEdge ? 'Popup mode for native Store integration' : 'Direct mode for portable installer downloads'}</p>
-            `;
-        }
             }
             
             // Update browser detection display
