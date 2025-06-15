@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edge Popup Test - Find the Right Configuration</title>
+    <title>Microsoft Store Badge Test</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -32,32 +32,50 @@
         
         .test-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
             margin: 32px 0;
         }
         
         .test-card {
             background: #f8f9fa;
-            padding: 24px;
+            padding: 32px;
             border-radius: 12px;
             border: 2px solid #e9ecef;
         }
         
+        .test-card.edge {
+            border-color: #0078d4;
+            background: #f0f8ff;
+        }
+        
+        .test-card.non-edge {
+            border-color: #ff6b35;
+            background: #fff5f2;
+        }
+        
         .test-card h3 {
             margin: 0 0 16px 0;
+            font-size: 1.3em;
+        }
+        
+        .test-card.edge h3 {
             color: #0078d4;
-            font-size: 1.2em;
+        }
+        
+        .test-card.non-edge h3 {
+            color: #ff6b35;
         }
         
         .test-description {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #666;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
         
         .badge-container {
-            margin: 16px 0;
+            margin: 20px 0;
             min-height: 60px;
             display: flex;
             align-items: center;
@@ -72,108 +90,98 @@
             text-align: left;
         }
         
+        .instructions.edge {
+            background: #e8f5e8;
+            border-left: 4px solid #0078d4;
+        }
+        
+        .instructions.non-edge {
+            background: #fff3e0;
+            border-left: 4px solid #ff6b35;
+        }
+        
         .instructions h3 {
             margin: 0 0 12px 0;
-            color: #1976d2;
+        }
+        
+        .instructions.edge h3 {
+            color: #0078d4;
+        }
+        
+        .instructions.non-edge h3 {
+            color: #ff6b35;
         }
         
         .browser-info {
-            background: #fff3e0;
+            background: #f8f9fa;
             padding: 16px;
             border-radius: 8px;
             margin-top: 24px;
             font-size: 0.9em;
         }
+        
+        .browser-detected {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .browser-detected.edge {
+            background: #e3f2fd;
+            color: #0078d4;
+            border: 1px solid #0078d4;
+        }
+        
+        .browser-detected.non-edge {
+            background: #fff3e0;
+            color: #ff6b35;
+            border: 1px solid #ff6b35;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔬 Edge Popup Test</h1>
-        <p>Test different Microsoft Store badge configurations to find which one creates the native popup in Edge</p>
+        <h1 id="page-title">Microsoft Store Badge Test</h1>
+        <p id="page-description">Testing Microsoft Store badge behavior across different browsers</p>
         
-        <div style="background: #d4edda; border: 1px solid #c3e6cb; padding: 16px; border-radius: 8px; margin-bottom: 20px;">
-            <strong>🎉 DISCOVERY:</strong> Spotify uses <code>window-mode="popup"</code> - this should be the solution for native popups!
-        </div>
-        
-        <div class="instructions">
-            <h3>📋 Testing Instructions for Edge Users:</h3>
-            <ol>
-                <li>Open this page in Microsoft Edge</li>
-                <li>Try clicking each badge below</li>
-                <li>Note which one shows a <strong>popup over this page</strong> vs which ones navigate away</li>
-                <li>The goal is to find the configuration that keeps you on this page with a popup</li>
-            </ol>
+        <div id="instructions" class="instructions">
+            <h3 id="instructions-title">📋 Testing Instructions:</h3>
+            <div id="instructions-content"></div>
         </div>
         
         <div class="test-grid">
-            <!-- Test 1: window-mode="popup" (FOUND ON SPOTIFY!) -->
-            <div class="test-card" style="border-color: #1db954; background: #f0fff4;">
-                <h3>✨ Test 1: Popup Mode (From Spotify!)</h3>
-                <div class="test-description">
-                    <strong>window-mode="popup"</strong> - This is what Spotify uses! Should create native popup over page.
-                </div>
-                <div class="badge-container">
-                    <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
-                    <ms-store-badge 
-                        cid="spotifywebplayer-store-button" 
-                        productid="9NCBCSZSJRSB" 
-                        productname="Spotify" 
-                        theme="dark" 
-                        language="en" 
-                        animation="off" 
-                        window-mode="popup">
-                    </ms-store-badge>
-                </div>
-            </div>
-            
-            <!-- Test 2: window-mode="popup" with Discord -->
-            <div class="test-card">
-                <h3>Test 2: Popup Mode (Discord)</h3>
-                <div class="test-description">
-                    <strong>window-mode="popup"</strong> with Discord app to test if popup works across different products
-                </div>
+            <!-- Test 1: Spotify -->
+            <div id="test-card-1" class="test-card">
+                <h3>Test 1: <span id="test-1-mode"></span></h3>
+                <div id="test-1-description" class="test-description"></div>
                 <div class="badge-container">
                     <ms-store-badge 
-                        productid="XPDC2RH70K22MN" 
-                        productname="Discord" 
-                        window-mode="popup"
-                        theme="auto"
-                        animation="off"
-                        cid="test-discord-popup">
-                    </ms-store-badge>
-                </div>
-            </div>
-            
-            <!-- Test 3: window-mode="direct" for non-Edge browsers -->
-            <div class="test-card">
-                <h3>Test 3: Direct Mode</h3>
-                <div class="test-description">
-                    window-mode="direct" - downloads installer and stays on page (best for Chrome/Firefox)
-                </div>
-                <div class="badge-container">
-                    <ms-store-badge 
+                        id="badge-1"
                         productid="9NCBCSZSJRSB" 
                         productname="Spotify Music" 
-                        window-mode="direct"
                         theme="auto"
-                        cid="test-direct">
+                        animation="off"
+                        cid="test-spotify">
                     </ms-store-badge>
                 </div>
             </div>
             
-            <!-- Test 4: window-mode="direct" with Discord -->
-            <div class="test-card">
-                <h3>Test 4: Direct Mode (Discord)</h3>
-                <div class="test-description">
-                    window-mode="direct" with Discord - downloads installer for non-Edge browsers
-                </div>
+            <!-- Test 2: Discord -->
+            <div id="test-card-2" class="test-card">
+                <h3>Test 2: <span id="test-2-mode"></span></h3>
+                <div id="test-2-description" class="test-description"></div>
                 <div class="badge-container">
                     <ms-store-badge 
+                        id="badge-2"
                         productid="XPDC2RH70K22MN" 
                         productname="Discord" 
-                        window-mode="direct"
                         theme="auto"
-                        cid="test-direct-discord">
+                        animation="off"
+                        cid="test-discord">
                     </ms-store-badge>
                 </div>
             </div>
@@ -184,44 +192,176 @@
         </div>
     </div>
 
+    <!-- Microsoft Store Badge Script -->
+    <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+    
     <script>
         // Browser detection
         function detectBrowser() {
             const userAgent = navigator.userAgent.toLowerCase();
             
             if (userAgent.includes('edg/') || userAgent.includes('edge/')) {
-                return '🔷 Microsoft Edge - Perfect for testing!';
+                return {
+                    name: 'Microsoft Edge',
+                    isEdge: true,
+                    icon: '🔷'
+                };
             }
             if (userAgent.includes('firefox/')) {
-                return '🦊 Firefox - For best popup testing, try this page in Edge';
+                return {
+                    name: 'Firefox',
+                    isEdge: false,
+                    icon: '🦊'
+                };
             }
-            if (userAgent.includes('chrome/')) {
-                return '🌐 Chrome - For best popup testing, try this page in Edge';
+            if (userAgent.includes('chrome/') && navigator.vendor?.toLowerCase().includes('google')) {
+                return {
+                    name: 'Chrome',
+                    isEdge: false,
+                    icon: '🌐'
+                };
+            }
+            if (userAgent.includes('safari/') && navigator.vendor?.toLowerCase().includes('apple')) {
+                return {
+                    name: 'Safari',
+                    isEdge: false,
+                    icon: '🧭'
+                };
+            }
+            if (userAgent.includes('opr/') || userAgent.includes('opera/')) {
+                return {
+                    name: 'Opera',
+                    isEdge: false,
+                    icon: '🎭'
+                };
             }
             
-            return '❓ Unknown browser - For best popup testing, try this page in Edge';
+            return {
+                name: 'Unknown Browser',
+                isEdge: false,
+                icon: '❓'
+            };
         }
         
-        // Display browser info
-        document.getElementById('browser-detection').innerHTML = `
-            <strong>Browser detected:</strong> ${detectBrowser()}
-        `;
+        // Configure page based on browser
+        function configurePage() {
+            const browser = detectBrowser();
+            const isEdge = browser.isEdge;
+            
+            // Update page title and description
+            if (isEdge) {
+                document.getElementById('page-title').textContent = 'Edge Popup Test';
+                document.getElementById('page-description').textContent = 'Testing native Microsoft Store popup behavior in Edge';
+            } else {
+                document.getElementById('page-title').textContent = 'Non-Edge Popup Test';
+                document.getElementById('page-description').textContent = 'Testing Microsoft Store direct download behavior in non-Edge browsers';
+            }
+            
+            // Update instructions
+            const instructionsDiv = document.getElementById('instructions');
+            const instructionsTitle = document.getElementById('instructions-title');
+            const instructionsContent = document.getElementById('instructions-content');
+            
+            if (isEdge) {
+                instructionsDiv.className = 'instructions edge';
+                instructionsTitle.textContent = '🔷 Edge Popup Testing:';
+                instructionsContent.innerHTML = `
+                    <ol>
+                        <li>Click each badge below</li>
+                        <li>Look for a <strong>native popup that appears over this page</strong></li>
+                        <li>The popup should NOT navigate away from this page</li>
+                        <li>Compare if both Spotify and Discord show the same popup behavior</li>
+                    </ol>
+                `;
+            } else {
+                instructionsDiv.className = 'instructions non-edge';
+                instructionsTitle.textContent = '🌐 Non-Edge Direct Download Testing:';
+                instructionsContent.innerHTML = `
+                    <ol>
+                        <li>Click each official <strong>"Get it from Microsoft Store"</strong> badge below</li>
+                        <li>Look for a <strong>direct download of the installer</strong></li>
+                        <li>You should stay on this page (no navigation away)</li>
+                        <li>Compare if both Spotify and Discord download installers the same way</li>
+                    </ol>
+                `;
+            }
+            
+            // Update test cards
+            const testCard1 = document.getElementById('test-card-1');
+            const testCard2 = document.getElementById('test-card-2');
+            const badge1 = document.getElementById('badge-1');
+            const badge2 = document.getElementById('badge-2');
+            
+            if (isEdge) {
+                // Edge configuration - popup mode
+                testCard1.className = 'test-card edge';
+                testCard2.className = 'test-card edge';
+                
+                document.getElementById('test-1-mode').textContent = 'Edge Popup Mode (Spotify)';
+                document.getElementById('test-2-mode').textContent = 'Edge Popup Mode (Discord)';
+                
+                document.getElementById('test-1-description').textContent = 'Official Microsoft Store badge with window-mode="popup". Should show native popup over this page without navigating away.';
+                document.getElementById('test-2-description').textContent = 'Official Microsoft Store badge with window-mode="popup" for Discord. Test if popup behavior is consistent across apps.';
+                
+                badge1.setAttribute('window-mode', 'popup');
+                badge2.setAttribute('window-mode', 'popup');
+            } else {
+                // Non-Edge configuration - direct mode
+                testCard1.className = 'test-card non-edge';
+                testCard2.className = 'test-card non-edge';
+                
+                document.getElementById('test-1-mode').textContent = 'Non-Edge Direct Mode (Spotify)';
+                document.getElementById('test-2-mode').textContent = 'Non-Edge Direct Mode (Discord)';
+                
+                document.getElementById('test-1-description').textContent = 'Official Microsoft Store badge with window-mode="direct". Should download portable installer and stay on this page.';
+                document.getElementById('test-2-description').textContent = 'Official Microsoft Store badge with window-mode="direct" for Discord. Test if direct download works consistently.';
+                
+                badge1.setAttribute('window-mode', 'direct');
+                badge2.setAttribute('window-mode', 'direct');
+            }
+            
+            // Update browser detection display
+            const browserDetection = document.getElementById('browser-detection');
+            const detectionClass = isEdge ? 'edge' : 'non-edge';
+            
+            browserDetection.innerHTML = `
+                <div class="browser-detected ${detectionClass}">
+                    <span>${browser.icon}</span>
+                    <span>Detected: ${browser.name}</span>
+                </div>
+                <p><strong>Configuration:</strong> ${isEdge ? 'Popup mode for native Store integration' : 'Direct mode for portable installer downloads'}</p>
+            `;
+        }
         
-        // Add click tracking to see what happens
+        // Add click tracking
         document.addEventListener('click', function(e) {
-            if (e.target.closest('ms-store-badge') || e.target.closest('a[href*="ms-windows-store"]')) {
-                console.log('Microsoft Store element clicked:', e.target);
+            if (e.target.closest('ms-store-badge')) {
+                const badge = e.target.closest('ms-store-badge');
+                const windowMode = badge.getAttribute('window-mode');
+                const productName = badge.getAttribute('productname');
+                
+                console.log(`${productName} badge clicked with window-mode="${windowMode}"`);
                 
                 // Check after a delay to see if we're still on this page
                 setTimeout(() => {
                     if (document.hasFocus()) {
-                        console.log('Still on page - might have popup or download');
+                        console.log('Still on page - popup or download likely occurred');
                     } else {
                         console.log('Left page - probably opened Store app');
                     }
                 }, 1000);
             }
         });
+        
+        // Initialize page when loaded
+        document.addEventListener('DOMContentLoaded', configurePage);
+        
+        // Also run immediately in case DOMContentLoaded already fired
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', configurePage);
+        } else {
+            configurePage();
+        }
     </script>
 </body>
 </html>
