@@ -440,23 +440,24 @@
 </style>
 
 <script>
-  (function(){
-    const isEdge = /\bEdg\//.test(navigator.userAgent);
-    if (isEdge) return;                       // skip Edge
+(function () {
+  // Skip Edge
+  if (/\bEdg\//.test(navigator.userAgent)) return;
 
-    const hint        = document.getElementById('download-hint');
-    const btnSelector = '#download, [data-download], .download-btn';  // adjust if needed
-    const downloadBtn = document.querySelector(btnSelector);
+  const hint = document.getElementById('download-hint');
 
-    if (!downloadBtn){
-      console.warn('Download button not found:', btnSelector);
-      return;
-    }
+  // Show arrow the first time the user clicks something that looks like a download
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest(
+      'a[download], a[href$=".exe"], a[href$=".msi"], a[href$=".zip"], a[href$=".dmg"]'
+    );
+    if (!link) return;
 
-    /* 👇 Show arrow on first click and keep it visible forever */
-    downloadBtn.addEventListener('click', () => { hint.hidden = false; }, { once:true });
-  })();
+    hint.hidden = false;       // reveal arrow
+    // Remove listener after the first successful match
+    document.removeEventListener('click', arguments.callee, true);
+  }, true); // use capture to catch the click before navigation happens
+})();
 </script>
-
 </body>
 </html>
