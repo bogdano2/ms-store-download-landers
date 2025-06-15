@@ -330,32 +330,70 @@
                 document.getElementById('test-1-description').textContent = 'Official Microsoft Store badge with window-mode="popup". Should show native popup over this page without navigating away. Auto-loads on page load!';
                 document.getElementById('test-2-description').textContent = 'Official Microsoft Store badge with window-mode="popup" for Discord. Click to test popup behavior manually.';
                 
+            if (isEdge) {
+                // Edge configuration - popup mode
+                testCard1.className = 'test-card edge';
+                testCard2.className = 'test-card edge';
+                
+                document.getElementById('test-1-mode').textContent = 'Edge Popup Mode (Spotify)';
+                document.getElementById('test-2-mode').textContent = 'Edge Popup Mode (Discord)';
+                
+                document.getElementById('test-1-description').textContent = 'Official Microsoft Store badge with window-mode="popup". Should show native popup over this page without navigating away. Auto-loads on page load!';
+                document.getElementById('test-2-description').textContent = 'Official Microsoft Store badge with window-mode="popup" for Discord. Click to test popup behavior manually.';
+                
                 badge1.setAttribute('window-mode', 'popup');
                 badge2.setAttribute('window-mode', 'popup');
                 
                 // Show auto-popup notice and start countdown
                 const autoPopupNotice = document.getElementById('auto-popup-notice');
                 const countdownElement = document.getElementById('countdown');
+                
+                console.log('Edge detected - showing auto-popup notice');
                 autoPopupNotice.classList.add('show');
                 
-                let countdown = 2;
+                let countdown = 3;
+                countdownElement.textContent = countdown;
+                
                 const countdownInterval = setInterval(() => {
                     countdown--;
                     countdownElement.textContent = countdown;
+                    console.log('Countdown:', countdown);
                     
                     if (countdown <= 0) {
                         clearInterval(countdownInterval);
                         autoPopupNotice.innerHTML = '🎯 Auto-triggering Spotify popup now...';
+                        console.log('Attempting to trigger popup...');
                         
-                        // Auto-trigger the first popup after countdown
+                        // Try multiple methods to trigger the popup
                         setTimeout(() => {
-                            console.log('Auto-triggering Spotify popup for Edge testing...');
+                            // Method 1: Direct click
+                            console.log('Method 1: Direct click on badge');
                             badge1.click();
                             
-                            // Hide notice after triggering
+                            // Method 2: Dispatch click event
+                            setTimeout(() => {
+                                console.log('Method 2: Dispatching click event');
+                                const clickEvent = new MouseEvent('click', {
+                                    view: window,
+                                    bubbles: true,
+                                    cancelable: true
+                                });
+                                badge1.dispatchEvent(clickEvent);
+                            }, 500);
+                            
+                            // Method 3: Try clicking child elements
+                            setTimeout(() => {
+                                console.log('Method 3: Trying to click child elements');
+                                const badgeImg = badge1.querySelector('img');
+                                if (badgeImg) {
+                                    badgeImg.click();
+                                }
+                            }, 1000);
+                            
+                            // Hide notice after all attempts
                             setTimeout(() => {
                                 autoPopupNotice.style.display = 'none';
-                            }, 2000);
+                            }, 3000);
                         }, 500);
                     }
                 }, 1000);
