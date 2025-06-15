@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -293,17 +292,6 @@
             const badge1 = document.getElementById('badge-1');
             const badge2 = document.getElementById('badge-2');
             
-            if (isEdge) {
-                // Edge configuration - popup mode
-                testCard1.className = 'test-card edge';
-                testCard2.className = 'test-card edge';
-                
-                document.getElementById('test-1-mode').textContent = 'Edge Popup Mode (Spotify)';
-                document.getElementById('test-2-mode').textContent = 'Edge Popup Mode (Discord)';
-                
-                document.getElementById('test-1-description').textContent = 'Official Microsoft Store badge with window-mode="popup". Should show native popup over this page without navigating away. Auto-loads on page load!';
-                document.getElementById('test-2-description').textContent = 'Official Microsoft Store badge with window-mode="popup" for Discord. Click to test popup behavior manually.';
-                
             if (isEdge) {
                 // Edge configuration - popup mode
                 testCard1.className = 'test-card edge';
