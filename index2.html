@@ -91,6 +91,10 @@
         <h1>🔬 Edge Popup Test</h1>
         <p>Test different Microsoft Store badge configurations to find which one creates the native popup in Edge</p>
         
+        <div style="background: #d4edda; border: 1px solid #c3e6cb; padding: 16px; border-radius: 8px; margin-bottom: 20px;">
+            <strong>🎉 DISCOVERY:</strong> Spotify uses <code>window-mode="popup"</code> - this should be the solution for native popups!
+        </div>
+        
         <div class="instructions">
             <h3>📋 Testing Instructions for Edge Users:</h3>
             <ol>
@@ -102,14 +106,33 @@
         </div>
         
         <div class="test-grid">
-            <!-- Test 1: No window-mode (default) -->
+            <!-- Test 1: window-mode="popup" (FOUND ON SPOTIFY!) -->
+            <div class="test-card" style="border-color: #1db954; background: #f0fff4;">
+                <h3>✨ Test 1: Popup Mode (From Spotify!)</h3>
+                <div class="test-description">
+                    <strong>window-mode="popup"</strong> - This is what Spotify uses! Should create native popup over page.
+                </div>
+                <div class="badge-container">
+                    <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+                    <ms-store-badge 
+                        cid="spotifywebplayer-store-button" 
+                        productid="9NCBCSZSJRSB" 
+                        productname="Spotify" 
+                        theme="dark" 
+                        language="en" 
+                        animation="off" 
+                        window-mode="popup">
+                    </ms-store-badge>
+                </div>
+            </div>
+            
+            <!-- Test 2: No window-mode (default) -->
             <div class="test-card">
-                <h3>Test 1: Default (No window-mode)</h3>
+                <h3>Test 2: Default (No window-mode)</h3>
                 <div class="test-description">
                     Uses Microsoft's default behavior without specifying window-mode
                 </div>
                 <div class="badge-container">
-                    <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
                     <ms-store-badge 
                         productid="9NCBCSZSJRSB" 
                         productname="Spotify Music" 
@@ -119,9 +142,9 @@
                 </div>
             </div>
             
-            <!-- Test 2: window-mode="direct" -->
+            <!-- Test 3: window-mode="direct" -->
             <div class="test-card">
-                <h3>Test 2: Direct Mode</h3>
+                <h3>Test 3: Direct Mode</h3>
                 <div class="test-description">
                     window-mode="direct" - supposed to download installer and stay on page
                 </div>
@@ -136,9 +159,9 @@
                 </div>
             </div>
             
-            <!-- Test 3: window-mode="full" -->
+            <!-- Test 4: window-mode="full" -->
             <div class="test-card">
-                <h3>Test 3: Full Mode</h3>
+                <h3>Test 4: Full Mode</h3>
                 <div class="test-description">
                     window-mode="full" - supposed to open full Store app
                 </div>
@@ -153,9 +176,9 @@
                 </div>
             </div>
             
-            <!-- Test 4: Different product (to see if it matters) -->
+            <!-- Test 5: Different product (to see if it matters) -->
             <div class="test-card">
-                <h3>Test 4: Different App (Discord)</h3>
+                <h3>Test 5: Different App (Discord)</h3>
                 <div class="test-description">
                     Default mode with Discord app to test if product matters
                 </div>
@@ -169,9 +192,9 @@
                 </div>
             </div>
             
-            <!-- Test 5: Manual link to ms-windows-store protocol -->
+            <!-- Test 6: Manual link to ms-windows-store protocol -->
             <div class="test-card">
-                <h3>Test 5: Direct Protocol Link</h3>
+                <h3>Test 6: Direct Protocol Link</h3>
                 <div class="test-description">
                     Direct ms-windows-store:// protocol link (not using badge component)
                 </div>
@@ -183,9 +206,9 @@
                 </div>
             </div>
             
-            <!-- Test 6: Regular web link to Store -->
+            <!-- Test 7: Regular web link to Store -->
             <div class="test-card">
-                <h3>Test 6: Regular Web Link</h3>
+                <h3>Test 7: Regular Web Link</h3>
                 <div class="test-description">
                     Regular https link to Microsoft Store web page
                 </div>
