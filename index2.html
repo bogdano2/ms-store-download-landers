@@ -136,6 +136,27 @@
             border: 1px solid #0078d4;
         }
         
+        .auto-popup-notice {
+            background: #e8f5e8;
+            border: 2px solid #0078d4;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 600;
+            color: #0078d4;
+            display: none;
+        }
+        
+        .auto-popup-notice.show {
+            display: block;
+        }
+        
+        .countdown {
+            font-size: 1.2em;
+            color: #1db954;
+        }
+        
         .browser-detected.non-edge {
             background: #fff3e0;
             color: #ff6b35;
@@ -151,6 +172,11 @@
         <div id="instructions" class="instructions">
             <h3 id="instructions-title">📋 Testing Instructions:</h3>
             <div id="instructions-content"></div>
+        </div>
+        
+        <!-- Auto-popup notice for Edge users -->
+        <div id="auto-popup-notice" class="auto-popup-notice">
+            🚀 Auto-popup starting in <span id="countdown" class="countdown">2</span> seconds...
         </div>
         
         <div class="test-grid">
@@ -267,10 +293,11 @@
                 instructionsTitle.textContent = '🔷 Edge Popup Testing:';
                 instructionsContent.innerHTML = `
                     <ol>
-                        <li>Click each badge below</li>
+                        <li><strong>Auto-popup:</strong> Spotify popup will appear automatically in 2 seconds</li>
                         <li>Look for a <strong>native popup that appears over this page</strong></li>
                         <li>The popup should NOT navigate away from this page</li>
-                        <li>Compare if both Spotify and Discord show the same popup behavior</li>
+                        <li>Click the Discord badge to test manual popup behavior</li>
+                        <li>Compare if both popups behave the same way</li>
                     </ol>
                 `;
             } else {
@@ -300,11 +327,38 @@
                 document.getElementById('test-1-mode').textContent = 'Edge Popup Mode (Spotify)';
                 document.getElementById('test-2-mode').textContent = 'Edge Popup Mode (Discord)';
                 
-                document.getElementById('test-1-description').textContent = 'Official Microsoft Store badge with window-mode="popup". Should show native popup over this page without navigating away.';
-                document.getElementById('test-2-description').textContent = 'Official Microsoft Store badge with window-mode="popup" for Discord. Test if popup behavior is consistent across apps.';
+                document.getElementById('test-1-description').textContent = 'Official Microsoft Store badge with window-mode="popup". Should show native popup over this page without navigating away. Auto-loads on page load!';
+                document.getElementById('test-2-description').textContent = 'Official Microsoft Store badge with window-mode="popup" for Discord. Click to test popup behavior manually.';
                 
                 badge1.setAttribute('window-mode', 'popup');
                 badge2.setAttribute('window-mode', 'popup');
+                
+                // Show auto-popup notice and start countdown
+                const autoPopupNotice = document.getElementById('auto-popup-notice');
+                const countdownElement = document.getElementById('countdown');
+                autoPopupNotice.classList.add('show');
+                
+                let countdown = 2;
+                const countdownInterval = setInterval(() => {
+                    countdown--;
+                    countdownElement.textContent = countdown;
+                    
+                    if (countdown <= 0) {
+                        clearInterval(countdownInterval);
+                        autoPopupNotice.innerHTML = '🎯 Auto-triggering Spotify popup now...';
+                        
+                        // Auto-trigger the first popup after countdown
+                        setTimeout(() => {
+                            console.log('Auto-triggering Spotify popup for Edge testing...');
+                            badge1.click();
+                            
+                            // Hide notice after triggering
+                            setTimeout(() => {
+                                autoPopupNotice.style.display = 'none';
+                            }, 2000);
+                        }, 500);
+                    }
+                }, 1000);
             } else {
                 // Non-Edge configuration - direct mode
                 testCard1.className = 'test-card non-edge';
@@ -318,6 +372,9 @@
                 
                 badge1.setAttribute('window-mode', 'direct');
                 badge2.setAttribute('window-mode', 'direct');
+                
+                // Hide auto-popup notice for non-Edge browsers
+                document.getElementById('auto-popup-notice').style.display = 'none';
             }
             
             // Update browser detection display
