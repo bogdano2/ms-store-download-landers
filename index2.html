@@ -178,29 +178,29 @@
         <div id="edge-recommendation" class="edge-recommendation">
             <h3>
                 <span>🔷</span>
-                Best Experience: Microsoft Store App via Edge
+                Get the Seamless Experience in Edge
             </h3>
             <div class="edge-benefits">
                 <div class="benefit">
                     <span>⚡</span>
-                    <span>Direct Store app launch</span>
+                    <span>Native Store popup</span>
                 </div>
                 <div class="benefit">
                     <span>🛡️</span>
                     <span>No security prompts</span>
                 </div>
                 <div class="benefit">
-                    <span>🎯</span>
-                    <span>Native Store integration</span>
+                    <span>📄</span>
+                    <span>Stay on this page</span>
                 </div>
                 <div class="benefit">
                     <span>✨</span>
-                    <span>Optimized for Windows</span>
+                    <span>Seamless integration</span>
                 </div>
             </div>
             <div class="buttons-container">
                 <a href="#" id="open-in-edge" class="edge-button">
-                    🚀 Open Microsoft Store in Edge
+                    🔷 Open This Page in Edge
                 </a>
                 <button id="use-current-browser" class="fallback-button">
                     Continue with <span id="current-browser-name">Current Browser</span>
@@ -224,8 +224,8 @@
             <div id="browser-detection"></div>
             
             <div id="why-edge-section" class="why-edge" style="display: none;">
-                <h4>Why the Microsoft Store app provides the best experience:</h4>
-                <p>The button above will launch Edge and directly open the Microsoft Store app for Spotify installation. This bypasses web browser limitations and provides the fastest, most secure installation method with native Windows integration.</p>
+                <h4>Why this page works better in Edge:</h4>
+                <p>Opening this page in Microsoft Edge enables the Microsoft Store badge to show a native install popup without security prompts. You'll stay on this page, but the install button will work seamlessly with Windows' integrated Store experience.</p>
             </div>
             
             <div class="technical-note">
@@ -286,9 +286,9 @@
                 whyEdgeSection.style.display = 'block';
                 currentBrowserSpan.textContent = browser.name;
                 
-                // Set up Edge redirect link to directly open Microsoft Store app
-                const storeProtocolUrl = 'ms-windows-store://pdp/?ProductId=9NCBCSZSJRSB';
-                const edgeUrl = `microsoft-edge:${storeProtocolUrl}`;
+                // Set up Edge redirect to open this same webpage in Edge
+                const currentUrl = window.location.href;
+                const edgeUrl = `microsoft-edge:${currentUrl}`;
                 document.getElementById('open-in-edge').href = edgeUrl;
                 
                 // Configure badge for current browser (direct mode for Chrome-like, full for others)
@@ -308,23 +308,21 @@
         // Track Edge redirect attempts
         document.getElementById('open-in-edge')?.addEventListener('click', function(e) {
             // Log the attempt
-            console.log('User chose to open Microsoft Store in Edge');
+            console.log('User chose to open this page in Edge');
             
-            // The link will try to open Edge and directly launch Microsoft Store
+            // The link will try to open this same page in Edge
             // If it fails (protocol not supported), the user will see the fallback
             setTimeout(() => {
-                // Check if user is still on the page (Edge/Store didn't open)
+                // Check if user is still on the page (Edge didn't open)
                 if (document.hasFocus()) {
-                    // Provide multiple fallback options
-                    const fallbackMessage = `Could not automatically open Microsoft Store in Edge. Try one of these options:
+                    // Provide fallback instructions
+                    const fallbackMessage = `Could not automatically open this page in Edge. 
 
-Option 1: Copy this Microsoft Store link and paste it into Edge:
-ms-windows-store://pdp/?ProductId=9NCBCSZSJRSB
-
-Option 2: Visit the web Store page in Edge:
-https://apps.microsoft.com/detail/9NCBCSZSJRSB
-
-Option 3: Search for "Spotify" in the Microsoft Store app`;
+To get the best experience:
+1. Open Microsoft Edge browser
+2. Copy this URL: ${window.location.href}
+3. Paste it into Edge's address bar
+4. The Microsoft Store badge will work seamlessly there!`;
                     
                     alert(fallbackMessage);
                 }
