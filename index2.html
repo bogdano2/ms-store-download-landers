@@ -126,27 +126,29 @@
                 </div>
             </div>
             
-            <!-- Test 2: No window-mode (default) -->
+            <!-- Test 2: window-mode="popup" with Discord -->
             <div class="test-card">
-                <h3>Test 2: Default (No window-mode)</h3>
+                <h3>Test 2: Popup Mode (Discord)</h3>
                 <div class="test-description">
-                    Uses Microsoft's default behavior without specifying window-mode
+                    <strong>window-mode="popup"</strong> with Discord app to test if popup works across different products
                 </div>
                 <div class="badge-container">
                     <ms-store-badge 
-                        productid="9NCBCSZSJRSB" 
-                        productname="Spotify Music" 
+                        productid="XPDC2RH70K22MN" 
+                        productname="Discord" 
+                        window-mode="popup"
                         theme="auto"
-                        cid="test-default">
+                        animation="off"
+                        cid="test-discord-popup">
                     </ms-store-badge>
                 </div>
             </div>
             
-            <!-- Test 3: window-mode="direct" -->
+            <!-- Test 3: window-mode="direct" for non-Edge browsers -->
             <div class="test-card">
                 <h3>Test 3: Direct Mode</h3>
                 <div class="test-description">
-                    window-mode="direct" - supposed to download installer and stay on page
+                    window-mode="direct" - downloads installer and stays on page (best for Chrome/Firefox)
                 </div>
                 <div class="badge-container">
                     <ms-store-badge 
@@ -159,65 +161,20 @@
                 </div>
             </div>
             
-            <!-- Test 4: window-mode="full" -->
+            <!-- Test 4: window-mode="direct" with Discord -->
             <div class="test-card">
-                <h3>Test 4: Full Mode</h3>
+                <h3>Test 4: Direct Mode (Discord)</h3>
                 <div class="test-description">
-                    window-mode="full" - supposed to open full Store app
-                </div>
-                <div class="badge-container">
-                    <ms-store-badge 
-                        productid="9NCBCSZSJRSB" 
-                        productname="Spotify Music" 
-                        window-mode="full"
-                        theme="auto"
-                        cid="test-full">
-                    </ms-store-badge>
-                </div>
-            </div>
-            
-            <!-- Test 5: Different product (to see if it matters) -->
-            <div class="test-card">
-                <h3>Test 5: Different App (Discord)</h3>
-                <div class="test-description">
-                    Default mode with Discord app to test if product matters
+                    window-mode="direct" with Discord - downloads installer for non-Edge browsers
                 </div>
                 <div class="badge-container">
                     <ms-store-badge 
                         productid="XPDC2RH70K22MN" 
                         productname="Discord" 
+                        window-mode="direct"
                         theme="auto"
-                        cid="test-discord">
+                        cid="test-direct-discord">
                     </ms-store-badge>
-                </div>
-            </div>
-            
-            <!-- Test 6: Manual link to ms-windows-store protocol -->
-            <div class="test-card">
-                <h3>Test 6: Direct Protocol Link</h3>
-                <div class="test-description">
-                    Direct ms-windows-store:// protocol link (not using badge component)
-                </div>
-                <div class="badge-container">
-                    <a href="ms-windows-store://pdp/?ProductId=9NCBCSZSJRSB" 
-                       style="display: inline-block; padding: 8px 16px; background: #0078d4; color: white; text-decoration: none; border-radius: 4px;">
-                        📱 Direct Store Protocol
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Test 7: Regular web link to Store -->
-            <div class="test-card">
-                <h3>Test 7: Regular Web Link</h3>
-                <div class="test-description">
-                    Regular https link to Microsoft Store web page
-                </div>
-                <div class="badge-container">
-                    <a href="https://apps.microsoft.com/detail/9NCBCSZSJRSB" 
-                       target="_blank"
-                       style="display: inline-block; padding: 8px 16px; background: #1db954; color: white; text-decoration: none; border-radius: 4px;">
-                        🌐 Web Store Link
-                    </a>
                 </div>
             </div>
         </div>
