@@ -250,11 +250,11 @@
             
             // Update page title and description
             if (isEdge) {
-                document.getElementById('page-title').textContent = 'Edge Popup Test';
+                document.getElementById('page-title').innerHTML = `🔷 Edge Lander Test`;
                 document.getElementById('page-description').textContent = 'Testing native Microsoft Store popup behavior in Edge';
             } else {
-                document.getElementById('page-title').textContent = 'Non-Edge Popup Test';
-                document.getElementById('page-description').textContent = 'Testing Microsoft Store direct download behavior in non-Edge browsers';
+                document.getElementById('page-title').innerHTML = `${browser.icon} ${browser.name} Lander Test`;
+                document.getElementById('page-description').textContent = `Testing Microsoft Store direct download behavior in ${browser.name}`;
             }
             
             // Update instructions
