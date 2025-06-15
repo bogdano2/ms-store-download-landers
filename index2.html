@@ -420,5 +420,43 @@
             configurePage();
         }
     </script>
+    <style>
+  /* POSITION + ANIMATION (unchanged) */
+  #download-hint{
+    position:fixed;
+    top:58px;          /* tweak if needed */
+    right:82px;        /* tweak if needed */
+    z-index:9999;
+    pointer-events:none;
+    animation:bounce 1s infinite;
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%   {transform:translateY(-10px)}
+  }
+  /* Fade-in once, never hides again */
+  #download-hint[hidden]{animation:none;opacity:0;transition:opacity .25s ease}
+  #download-hint:not([hidden]){opacity:1}
+</style>
+
+<script>
+  (function(){
+    const isEdge = /\bEdg\//.test(navigator.userAgent);
+    if (isEdge) return;                       // skip Edge
+
+    const hint        = document.getElementById('download-hint');
+    const btnSelector = '#download, [data-download], .download-btn';  // adjust if needed
+    const downloadBtn = document.querySelector(btnSelector);
+
+    if (!downloadBtn){
+      console.warn('Download button not found:', btnSelector);
+      return;
+    }
+
+    /* 👇 Show arrow on first click and keep it visible forever */
+    downloadBtn.addEventListener('click', () => { hint.hidden = false; }, { once:true });
+  })();
+</script>
+
 </body>
 </html>
