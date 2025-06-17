@@ -235,7 +235,7 @@
 
         .download-arrow.toolbar {
             top: 10px;
-            right: 50px;
+            right: 75px;
             animation: bounceVertical 1s infinite;
         }
 
@@ -349,7 +349,7 @@
             const browser = detectBrowser();
             const badgeContainer = document.querySelector('.badge-container');
             
-            if (browser.isEdge) {
+ //           if (browser.isEdge) {
                 // Create the Microsoft Store badge for Edge
                 const badge = document.createElement('ms-store-badge');
                 badge.setAttribute('productid', '9NCBCSZSJRSB');
@@ -362,7 +362,7 @@
                 // Clear and append the new badge
                 badgeContainer.innerHTML = '';
                 badgeContainer.appendChild(badge);
-            } else {
+/*            } else {
                 // Create regular download button for non-Edge browsers
                 const downloadButton = document.createElement('button');
                 downloadButton.className = 'download-button';
@@ -395,7 +395,7 @@
             
             return browser;
         }
-
+*/
         // Update UI based on browser
         function updateUI() {
             const browser = initializeBadge();
@@ -420,9 +420,9 @@
             }
             
             // Set test modes and descriptions
-            document.getElementById('test-1-mode').textContent = isEdge ? 'Popup Store Installer Mode' : ' Download';
+            document.getElementById('test-1-mode').textContent = isEdge ? ' Popup Store Installer Mode' : ' Download';
             document.getElementById('test-1-description').textContent = isEdge 
-                ? 'In Edge, clicking the badge will show a popup without leaving the page.'
+                ? 'In Edge, clicking the badge will show an installer popup without leaving the page.'
                 : 'In other browsers, clicking the badge will start a direct download without opening the store.';
             
             // Add download hint for non-Edge browsers
