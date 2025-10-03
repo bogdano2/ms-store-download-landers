@@ -44,7 +44,7 @@
             "type": "msedge",
             "request": "launch",
             "name": "Open SpotifyDemo.html",
-            "file": "c:\\Users\\solve\\projects\\ms-store-download-landers\\SpotifyDemo.html"
+            "file": "c:\\Users\\solve\\projects\\ms-store-download-landers\\index.html"
         }
     ]
 }
