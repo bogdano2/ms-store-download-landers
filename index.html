@@ -289,7 +289,7 @@
                         productname="Maverick Safe" 
                         theme="dark"
                         animation="off"
-                        window-mode="popup"
+                        window-mode="mini"
                         cid="test-maverick">
                     </ms-store-badge>
                 </div>
@@ -356,7 +356,7 @@
                 badge.setAttribute('productname', 'Maverick Safe');
                 badge.setAttribute('theme', 'auto');
                 badge.setAttribute('animation', 'off');
-                badge.setAttribute('window-mode', 'popup');
+                badge.setAttribute('window-mode', 'mini');
                 badge.setAttribute('cid', 'test-maverick');
                 
                 // Clear and append the new badge
@@ -420,7 +420,7 @@
             }
             
             // Set test modes and descriptions
-            document.getElementById('test-1-mode').textContent = isEdge ? ' Popup Store Installer Mode' : ' Download';
+            document.getElementById('test-1-mode').textContent = isEdge ? ' Mini Store Installer Mode' : ' Download';
             document.getElementById('test-1-description').textContent = isEdge 
                 ? 'In Edge, clicking the badge will show a popup without leaving the page.'
                 : 'In other browsers, clicking the badge will start a direct download without opening the store.';
@@ -460,6 +460,7 @@
     </script>
 </body>
 </html>
+
 
 
 
